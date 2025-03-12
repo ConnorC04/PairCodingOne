@@ -59,8 +59,19 @@ public abstract class Account {
     public void addTransaction(Transaction transaction) { transactionHistory.add(transaction); }
 
     public Double interest(Double accountBalance, Double interestRate){
-        Double newBalance = accountBalance * interestRate;
+        double newBalance = accountBalance * interestRate;
         newBalance += accountBalance;
         return newBalance;
+    }
+
+    public boolean overDraft(Double accountBalance, Double withdrawAmount){
+        return (accountBalance - withdrawAmount) < 0;
+    }
+
+    public Double withdraw(Double accountBalance, Double withdrawAmount) throws Exception {
+        if (overDraft(accountBalance, withdrawAmount)) {
+            throw new Exception("Insufficient Funds!");
+        }
+        return accountBalance - withdrawAmount;
     }
 }
