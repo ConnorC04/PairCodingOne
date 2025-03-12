@@ -2,7 +2,7 @@ package io.zipcoder;
 
 import java.util.ArrayList;
 
-public abstract class Account {
+public abstract class Account implements Bank {
 
     private Integer accNum;
     private Double accBalance;
