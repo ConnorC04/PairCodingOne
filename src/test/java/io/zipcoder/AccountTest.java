@@ -133,9 +133,8 @@ public class AccountTest {
     public void testAddTransaction(){
         setUp();
 
-        businessChecking.deposit(1.0);
-        businessSavings.deposit(1.0);
-       // businessSavings.addTransaction();
+        businessChecking.interest(0.07);
+        businessSavings.interest(0.08);
     }
 
 
