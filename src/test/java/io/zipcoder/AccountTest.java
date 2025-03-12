@@ -111,13 +111,31 @@ public class AccountTest {
         });
         String expectedMessage2 = "Interest Rate cannot be negative";
         String actualMessage2 = exception.getMessage();
-        assertTrue(expectedMessage.contains(actualMessage2));
+        assertTrue(expectedMessage2.contains(actualMessage2));
         assertEquals(1, businessChecking.getAccBalance());
     }
 
     @Test
     public void testInterest(){
+        setUp();
 
+        businessSavings.interest(0.07);
+        businessChecking.interest(0.08);
+
+        Double expectedSavings = 1.07;
+        Double expectedChecking = 1.08;
+
+        assertEquals(expectedChecking, businessChecking.getAccBalance());
+        assertEquals(expectedSavings, businessSavings.getAccBalance());
+    }
+
+    @Test
+    public void testAddTransaction(){
+        setUp();
+
+        businessChecking.deposit(1.0);
+        businessSavings.deposit(1.0);
+        businessSavings.addTransaction();
     }
 
 

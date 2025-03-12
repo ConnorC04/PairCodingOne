@@ -10,6 +10,7 @@ public abstract class Account implements Bank {
     private String email;
     private Savings savings;
     private Checking checking;
+    private Transaction transaction;
     private ArrayList<Transaction> transactionHistory;
 
 
@@ -77,6 +78,8 @@ public abstract class Account implements Bank {
         }else{
             double applyRate = this.accBalance * interestRate;
             this.accBalance += applyRate;
+            this.transaction = new Transaction();
+            addTransaction(this.transaction);
         }
     }
 
