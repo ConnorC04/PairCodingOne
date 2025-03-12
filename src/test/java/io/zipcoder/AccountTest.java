@@ -1,6 +1,6 @@
 package io.zipcoder;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
@@ -8,7 +8,7 @@ public class AccountTest {
 
     private BusinessAccount businessAccount;
 
-    @BeforeEach
+
     public void setUp(){
         businessAccount = new BusinessAccount(1, 1.0, "John Doe");
     }
@@ -16,6 +16,8 @@ public class AccountTest {
 
     @Test
     public void testOverDraft(){
+
+        setUp();
 
         boolean expectedOverDraft = true;
         boolean expectedNotOverDraft = false;
@@ -29,6 +31,12 @@ public class AccountTest {
 
     @Test
     public void testWithdraw(){
+
+        setUp();
+
+        Double expectedWithdrawn = 20.0;
+
+
 
 
     }
