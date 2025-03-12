@@ -31,8 +31,8 @@ public class AccountTest {
         boolean actualOverDraft = businessSavings.overDraft(70.0, 80.0);
         boolean actualNotOverDraft = businessSavings.overDraft(70.0, 50.0);
 
-        boolean actualOverDraft2 = businessChecking.overDraft(70.0, 80.0);
-        boolean actualNotOverDraft2 = businessChecking.overDraft(70.0, 50.0);
+        boolean actualOverDraft2 = businessChecking.overDraft(20.0, 80.0);
+        boolean actualNotOverDraft2 = businessChecking.overDraft(100.0, 50.0);
 
         Assert.assertEquals(expectedOverDraft, actualOverDraft);
         Assert.assertEquals(expectedNotOverDraft, actualNotOverDraft);
@@ -82,8 +82,8 @@ public class AccountTest {
             businessSavings.deposit(-1.0);
         });
         String expectedMessage = "Deposit amount cannot be negative";
-        String actualMesage = exception.getMessage();
-        assertTrue(expectedMessage.contains(actualMesage));
+        String actualMessage = exception.getMessage();
+        assertTrue(expectedMessage.contains(actualMessage));
         assertEquals(1, businessSavings.getAccBalance());
     }
 
@@ -93,4 +93,32 @@ public class AccountTest {
         businessSavings.deposit(1.0);
         assertEquals(2.0, businessSavings.getAccBalance());
     }
+
+    @Test
+    public void testInterestNegative(){
+        setUp();
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            businessSavings.interest(-1.0);
+        });
+        String expectedMessage = "Interest Rate cannot be negative";
+        String actualMessage = exception.getMessage();
+        assertTrue(expectedMessage.contains(actualMessage));
+        assertEquals(1, businessSavings.getAccBalance());
+
+
+        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> {
+            businessChecking.deposit(-5.0);
+        });
+        String expectedMessage2 = "Interest Rate cannot be negative";
+        String actualMessage2 = exception.getMessage();
+        assertTrue(expectedMessage.contains(actualMessage2));
+        assertEquals(1, businessChecking.getAccBalance());
+    }
+
+    @Test
+    public void testInterest(){
+
+    }
+
+
 }
