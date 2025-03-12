@@ -8,11 +8,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountTest {
 
-    private BusinessAccount businessAccount;
+    private BusinessAccount businessSavings;
+    private  BusinessAccount businessChecking;
+    private Savings savings;
+    private Checking checking;
 
 
     public void setUp(){
-        businessAccount = new BusinessAccount(1, 1.0, "John Doe");
+        businessSavings = new BusinessAccount(1, 1.0, "John Doe", savings);
+        businessChecking = new BusinessAccount(1, 1.0, "John Doe", checking);
     }
 
 
@@ -24,64 +28,69 @@ public class AccountTest {
         boolean expectedOverDraft = true;
         boolean expectedNotOverDraft = false;
 
-        boolean actualOverDraft = businessAccount.overDraft(70.0, 80.0);
-        boolean actualNotOverDraft = businessAccount.overDraft(70.0, 50.0);
+        boolean actualOverDraft = businessSavings.overDraft(70.0, 80.0);
+        boolean actualNotOverDraft = businessSavings.overDraft(70.0, 50.0);
+
+        boolean actualOverDraft2 = businessChecking.overDraft(70.0, 80.0);
+        boolean actualNotOverDraft2 = businessChecking.overDraft(70.0, 50.0);
 
         Assert.assertEquals(expectedOverDraft, actualOverDraft);
         Assert.assertEquals(expectedNotOverDraft, actualNotOverDraft);
+        Assert.assertEquals(expectedOverDraft, actualOverDraft2);
+        Assert.assertEquals(expectedNotOverDraft, actualNotOverDraft2);
     }
 
     @Test
     public void testInsufficientFunds(){
         setUp();
         Exception exception = assertThrows(IllegalStateException.class, () -> {
-            businessAccount.withdraw(50.0);
+            businessSavings.withdraw(50.0);
         });
 
         String expectedMessage = "Insufficient funds";
         String actualMessage = exception.getMessage();
 
         assertTrue(expectedMessage.contains(actualMessage));
-        assertEquals(1, businessAccount.getAccBalance());
+        assertEquals(1, businessSavings.getAccBalance());
     }
 
     @Test
     public void testWithdrawNegative(){
         setUp();
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            businessAccount.withdraw(-1.0);
+            businessSavings.withdraw(-1.0);
         });
 
         String expectedMessage = "Withdrawal amount cannot be negative";
         String actualMessage = exception.getMessage();
 
         assertTrue(expectedMessage.contains(actualMessage));
-        assertEquals(1, businessAccount.getAccBalance());
+        assertEquals(1, businessSavings.getAccBalance());
     }
 
     @Test
     public void testWithdraw(){
         setUp();
-        businessAccount.withdraw(1.0);
-        assertEquals(0.0, businessAccount.getAccBalance());
+        businessSavings.withdraw(1.0);
+        assertEquals(0.0, businessSavings.getAccBalance());
     }
 
     @Test
     public void testDepositNegative(){
         setUp();
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            businessAccount.deposit(-1.0);
+            businessSavings.deposit(-1.0);
         });
         String expectedMessage = "Deposit amount cannot be negative";
         String actualMesage = exception.getMessage();
         assertTrue(expectedMessage.contains(actualMesage));
-        assertEquals(1, businessAccount.getAccBalance());
+        assertEquals(1, businessSavings.getAccBalance());
     }
 
     @Test
     public void testDeposit(){
         setUp();
-        businessAccount.deposit(1.0);
-        assertEquals(2.0, businessAccount.getAccBalance());
+        businessSavings.deposit(1.0);
+        assertEquals(2.0, businessSavings.getAccBalance());
     }
 }
