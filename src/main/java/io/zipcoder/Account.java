@@ -58,20 +58,34 @@ public abstract class Account implements Bank {
 
     public void addTransaction(Transaction transaction) { transactionHistory.add(transaction); }
 
-    public Double interest(Double accountBalance, Double interestRate){
-        double newBalance = accountBalance * interestRate;
-        newBalance += accountBalance;
-        return newBalance;
+    public void interest(Double interestRate){
+        if (interestRate < 0){
+            throw new IllegalArgumentException("Interest Rate cannot be negative");
+        }else{
+            double applyRate = this.accBalance * interestRate;
+            this.accBalance += applyRate;
+        }
     }
 
     public boolean overDraft(Double accountBalance, Double withdrawAmount){
         return (accountBalance - withdrawAmount) < 0;
     }
 
-    public Double withdraw(Double accountBalance, Double withdrawAmount) throws Exception {
-        if (overDraft(accountBalance, withdrawAmount)) {
-            throw new Exception("Insufficient Funds!");
+    public void withdraw(Double withdrawAmount) {
+        if (this.accBalance < withdrawAmount ){
+            throw new IllegalStateException("Insufficient funds");
+        }else if (withdrawAmount < 0){
+            throw new IllegalArgumentException("Withdrawal amount cannot be negative");
+        }else {
+            this.accBalance -= withdrawAmount;
         }
-        return accountBalance - withdrawAmount;
+    }
+
+    public void deposit(Double depositAmount){
+        if (depositAmount < 0){
+            throw new IllegalArgumentException("Deposit amount cannot be negative");
+        }else {
+            this.accBalance += depositAmount;
+        }
     }
 }
