@@ -1,5 +1,7 @@
 package io.zipcoder;
 
+import com.sun.tools.javac.comp.Check;
+
 import java.util.ArrayList;
 
 public abstract class Account implements Bank {
@@ -8,22 +10,35 @@ public abstract class Account implements Bank {
     private Double accBalance;
     private String accHolder;
     private String email;
+    private Savings savings;
+    private Checking checking
     private ArrayList<Transaction> transactionHistory;
 
 
     // For Business Accounts
-    public Account(Integer accNum, Double accBalance, String accHolder){
+    public Account(Integer accNum, Double accBalance, String accHolder, Savings savings){
         this.accNum = accNum;
         this.accBalance = accBalance;
         this.accHolder = accHolder;
+        this.savings = savings;
     }
 
+    public Account(Integer accNum, Double accBalance, String accHolder, Checking checking){
+        this.accNum = accNum;
+        this.accBalance = accBalance;
+        this.accHolder = accHolder;
+        this.checking = checking;
+    }
+
+
+
     // For Personal Accounts
-    public Account(Integer accNum, Double accBalance, String accHolder, String email){
+    public Account(Integer accNum, Double accBalance, String accHolder, String email, Integer accType){
         this.accNum = accNum;
         this.accBalance = accBalance;
         this.accHolder = accHolder;
         this.email = email;
+        this.accType = accType;
     }
 
     public Integer getAccNum() { return accNum; }
