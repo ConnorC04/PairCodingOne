@@ -17,6 +17,7 @@ public class AccountTest {
     public void setUp(){
         businessSavings = new BusinessAccount(1, 1.0, "John Doe", savings);
         businessChecking = new BusinessAccount(1, 1.0, "John Doe", checking);
+
     }
 
 

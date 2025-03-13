@@ -31,6 +31,11 @@ public abstract class Account implements Bank {
         this.checking = checking;
     }
 
+    // For Default Constructors
+    public Account(){
+
+    }
+
 //    // For Personal Accounts
 //    public Account(Integer accNum, Double accBalance, String accHolder, String email, Integer accType){
 //        this.accNum = accNum;

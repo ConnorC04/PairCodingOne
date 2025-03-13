@@ -10,4 +10,8 @@ public class BusinessAccount extends Account {
         super(accountNum, accountBal, accountHolder, checking);
     }
 
+    public BusinessAccount(){
+        super();
+    }
+
 }
