@@ -134,11 +134,16 @@ public class AccountTest {
     }
 
     @Test
-    public void testAddTransaction(){
+    public void testGetTransactionNum(){
         setUp();
 
-        businessChecking.interest(0.07);
-        businessSavings.interest(0.08);
+        Integer expectedNumTransaction = 1;
+
+        businessSavings.deposit(100.0);
+        businessChecking.deposit(200.0);
+
+        Assert.assertEquals(expectedNumTransaction, businessSavings.getNumTransactions());
+        Assert.assertEquals(expectedNumTransaction, businessChecking.getNumTransactions());
     }
 
 

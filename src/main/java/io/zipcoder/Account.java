@@ -83,8 +83,8 @@ public abstract class Account implements Bank {
         }else{
             double applyRate = this.accBalance * interestRate;
             this.accBalance += applyRate;
-            this.transaction = new Transaction();
-            addTransaction(this.transaction);
+
+
         }
     }
 
