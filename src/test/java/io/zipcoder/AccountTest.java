@@ -18,6 +18,9 @@ public class AccountTest {
         businessSavings = new BusinessAccount(1, 1.0, "John Doe", savings);
         businessChecking = new BusinessAccount(1, 1.0, "John Doe", checking);
 
+        // New stuff for rebase
+        businessSavings.deposit(1.0);
+
     }
 
 
