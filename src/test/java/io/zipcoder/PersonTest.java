@@ -14,26 +14,30 @@ public class PersonTest {
     public void setUp() {
         personcheckings = new PersonAccount(1, 1.0, "John Doe", savings);
         personsavings = new PersonAccount(1, 1.0, "John Doe", checking);
+
+        personsavings.deposit(1.0);
+        personcheckings.deposit(1.0);
+
     }
-//    @Test
-//    public void testOverDraft(){
-//
-//        setUp();
-//
-//        boolean expectedOverDraft = true;
-//        boolean expectedNotOverDraft = false;
-//
-//        boolean actualOverDraft = personsavings.overDraft(70.0, 80.0);
-//        boolean actualNotOverDraft = personsavings.overDraft(70.0, 50.0);
-//
-//        boolean actualOverDraft2 = personcheckings.overDraft(70.0, 80.0);
-//        boolean actualNotOverDraft2 = personcheckings.overDraft(70.0, 50.0);
-//
-//        Assert.assertEquals(expectedOverDraft, actualOverDraft);
-//        Assert.assertEquals(expectedNotOverDraft, actualNotOverDraft);
-//        Assert.assertEquals(expectedOverDraft, actualOverDraft2);
-//        Assert.assertEquals(expectedNotOverDraft, actualNotOverDraft2);
-//    }
+    @Test
+    public void testOverDraft(){
+//oaiefjoiefjioeajfoiajdfoiasjaijosg
+        setUp();
+
+        boolean expectedOverDraft = true;
+        boolean expectedNotOverDraft = false;
+
+        boolean actualOverDraft = personsavings.overDraft(70.0, 80.0);
+        boolean actualNotOverDraft = personsavings.overDraft(70.0, 50.0);
+
+        boolean actualOverDraft2 = personcheckings.overDraft(70.0, 80.0);
+        boolean actualNotOverDraft2 = personcheckings.overDraft(70.0, 50.0);
+
+        Assert.assertEquals(expectedOverDraft, actualOverDraft);
+        Assert.assertEquals(expectedNotOverDraft, actualNotOverDraft);
+        Assert.assertEquals(expectedOverDraft, actualOverDraft2);
+        Assert.assertEquals(expectedNotOverDraft, actualNotOverDraft2);
+    }
     @Test
     public void testInsufficientFunds(){
         setUp();
@@ -151,6 +155,14 @@ public class PersonTest {
         String actualMessage2 = exception.getMessage();
         assertTrue(expectedMessage.contains(actualMessage2));
         assertEquals(1, personsavings.getAccBalance());
+    }
+    @Test
+    public void testTransaction(){
+        personcheckings.interest(.07);
+        personcheckings.interest(.07);
+
+        assertEquals(1.07, personcheckings.get);
+
     }
 }
 
